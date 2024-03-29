@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Affectation Employé à Projet</title>
+    <h:outputStylesheet library="webjars" name="bootstrap/5.3.2/css/bootstrap.css"/>
+    <style type="text/css">
+        .center {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="container">
+        <h2 class="center">Affectation Employé</h2>
+        <h:form>
+            <div class="form-group">
+                <h:outputLabel for="employee">Nom de l'Employé:</h:outputLabel>
+                <h:selectOneMenu id="employee" value="#{projectBean.selectedEmployee}" class="form-control">
+                    <f:selectItem itemLabel="Sélectionnez un employé" itemValue=""/>
+                    <f:selectItems value="#{employeeBean.employees}" var="employee"
+                                   itemLabel="#{employee.name}" itemValue="#{employee.id}"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="project">Nom du Projet:</h:outputLabel>
+                <h:selectOneMenu id="project" value="#{projectBean.selectedProject}" class="form-control">
+                    <f:selectItem itemLabel="Sélectionnez un projet" itemValue=""/>
+                    <f:selectItems value="#{projectBean.projects}" var="project"
+                                   itemLabel="#{project.name}" itemValue="#{project.id}"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="implication">Implication (%):</h:outputLabel>
+                <h:inputText id="implication" value="#{projectBean.implication}" class="form-control"/>
+            </div>
+            <br/>
+            <div class="form-group center">
+                <h:commandButton value="Affecter Projet" action="#{projectBean.assignEmployeeToProject}" class="btn btn-primary"/>
+                <h:link value="Retour à l'accueil" outcome="/index" class="btn btn-info"/>
+                <h:link value="Voir les Employés" outcome="/employeeList" class="btn btn-info"/>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Liste des Employés</title>
+    <h:outputStylesheet library="webjars" name="bootstrap/5.3.2/css/bootstrap.css"/>
+    <style type="text/css">
+        .center {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .btn-space {
+            margin-right: 5px;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="container">
+        <h2 class="center">Liste des Employés</h2>
+        <div class="mb-2">
+            <h:link value="Ajouter Employé" outcome="/addEmployee" class="btn btn-success btn-space"/>
+            <h:link value="Retour à l'accueil" outcome="/index" class="btn btn-info"/>
+        </div>
+        <h:dataTable value="#{employeeBean.employees}" var="employee" styleClass="table table-hover">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{employee.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nom</f:facet>
+                #{employee.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Email</f:facet>
+                #{employee.email}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Compétences</f:facet>
+                #{employee.skills}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Projets</f:facet>
+                <h:dataTable value="#{employee.projects}" var="project">
+                    #{project.name} (#{project.implication}%),
+                </h:dataTable>
+            </h:column>
+            <h:column>
+                <h:commandButton value="Supprimer" action="#{employeeBean.deleteEmployee(employee.id)}" class="btn btn-danger"/>
+            </h:column>
+        </h:dataTable>
+    </div>
+</h:body>
+</html>
